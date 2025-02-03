@@ -73,6 +73,7 @@ namespace WindowsFormsApp6
 
             if (!words.TryGetValue(asd, out var sai))
             {
+                chart1.Visible = false;
                 label3.Visible = false;
                 label1.Visible = false;
                 label4.Visible = false;
@@ -114,12 +115,16 @@ namespace WindowsFormsApp6
         var H2 = document.DocumentNode.SelectSingleNode("/html/body/section[2]/h2").InnerText;
         Series series = new Series();
             chart1.Series.Clear();
-            foreach(var ser in chart1.Series)
+            chart1.ChartAreas[0].AxisX.IsMarginVisible = false;
+            chart1.ChartAreas[0].AxisY.Maximum = 70;
+            chart1.ChartAreas[0].AxisY.Interval = 10;
+            foreach (var ser in chart1.Series)
             {
                 series.Points.Clear();
             }
             if (carNodes != null)
             {
+                chart1.Visible = true;
                 label3.Visible = true;
                 label1.Visible = true;
                 label4.Visible = true;
@@ -160,6 +165,7 @@ namespace WindowsFormsApp6
             }
             else
             {
+                chart1.Visible = false;
                 label4.Visible = false;
                 label1.Visible = false;
                 label3.Visible = false;
