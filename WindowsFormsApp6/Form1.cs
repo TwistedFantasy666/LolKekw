@@ -25,7 +25,8 @@ namespace WindowsFormsApp6
         private async Task fklo(string asd)
         {
             var words = new Dictionary<string, string>()
-            {{"Телеграм", "telegram"},
+            {
+                {"Телеграм", "telegram"},
                 {"Telegram", "telegram"},
                 {"ВК", "vkontakte"},
                 {"Вк","vkontakte" },
@@ -69,6 +70,72 @@ namespace WindowsFormsApp6
                 {"Т-Банк","tbank"},
                 {"T-Bank","tbank"},
                 {"Т Банк","tbank"},
+                {"TeamSpeak", "teamspeak"},
+                {"Teamspeak", "teamspeak"},
+                {"Тимспик", "teamspeak"},
+                {"ТимСпик", "teamspeak"},
+                {"Skype", "skype"},
+                {"Скайп", "skype"},
+                {"МТС", "mts"},
+                {"Ростелеком", "rostelekom"},
+                {"Мегафон", "megafon"},
+                {"Билайн", "bilajn"},
+                {"Т2", "tele2"},
+                {"T2", "tele2"},
+                {"Теле2", "tele2"},
+                {"Tele2", "tele2"},
+                {"К Телеком", "k-telecom"},
+                {"K Telecom", "k-telecom"},
+                {"YOTA", "yota"},
+                {"ЙОТА", "tele2"},
+                {"Дом.ру", "domru"},
+                {"Дом ру", "domru"},
+                {"Триколор", "trikolor"},
+                {"Уфанет", "ufanet"},
+                {"Банк ВТБ", "bank-vtb"},
+                {"Промсвязьбанк", "psb"},
+                {"ТрансТелеКом", "ttk"},
+                {"Альфа-банк", "alfa-bank"},
+                {"Альфа банк", "alfa-bank"},
+                {"Тинькофф", "tinkoff"},
+                {"Газпромбанк", "gazprombank"},
+                {"МТС Банк", "mtsbank"},
+                {"СБП", "sbp"},
+                {"Яндекс", "yandeks"},
+                {"Yandex", "yandeks"},
+                {"Google", "google"},
+                {"Гугл", "google"},
+                {"Ozon", "ozon"},
+                {"Озон", "ozon"},
+                {"Wildberries", "wildberries"},
+                {"Вайлдбирес", "wildberries"},
+                {"МВД", "mvd"},
+                {"Моя Школа", "myschool"},
+                {"Моя школа", "myschool"},
+                {"ЕИС Закупки", "zakupkigov"},
+                {"ЕИС закупки", "zakupkigov"},
+                {"ФНС", "fns"},
+                {"Twitch", "twitch"},
+                {"Твич", "twitch"},
+                {"Твитч", "twitch"},
+                {"Roblox", "roblox"},
+                {"Роблокс", "roblox"},
+                {"FACEIT", "faceit"},
+                {"Faceit", "faceit"},
+                {"Arma Reforger", "armareforger"},
+                {"Арма рефорджек", "armareforger"},
+                {"PUBG: BATTLEGROUNDS", "pubg-battlegrounds"},
+                {"Пабг", "pubg-battlegrounds"},
+                {"PUBG", "pubg-battlegrounds"},
+                {"Genshin Impact", "genshinimpact"},
+                {"Геншин импакт", "genshinimpact"},
+                {"Геншин Импакт", "genshinimpact"},
+                {"Эпик Геймс", "epicgames"},
+                {"Epic Games", "epicgames"},
+                {"Дота 2", "dota-2"},
+                {"Dota 2", "dota-2"},
+                {"Валорант", "valorant"},
+                {"Valorant", "valorant"},
             };
 
             if (!words.TryGetValue(asd, out var sai))
@@ -98,25 +165,23 @@ namespace WindowsFormsApp6
         }
         void ParseHtml(string html)
         { 
-        //Капэц
-        string asa = "";
-        string ass = "";
-        string assa = "";
-        string h2 = "";
-        string lol = "";
-        label3.Text = "";
+            //Капэц
+            string asa = "";
+            string ass = "";
+            string assa = "";
+            label3.Text = "";
             label1.Text = "";
             chart1.Text = "";
             HtmlAgilityPack.HtmlDocument document = new HtmlAgilityPack.HtmlDocument();
-        document.LoadHtml(html);
+            document.LoadHtml(html);
             var carNodes = document.DocumentNode.SelectNodes("//span[@class = 'region']"); // Замените XPath на подходящий
-        var Nodes = document.DocumentNode.SelectNodes("//label[span]");
-        var caNodes = document.DocumentNode.SelectNodes("//span[@class = 'cause']");
-        var H2 = document.DocumentNode.SelectSingleNode("/html/body/section[2]/h2").InnerText;
-        Series series = new Series();
+            var Nodes = document.DocumentNode.SelectNodes("//label[span]");
+            var caNodes = document.DocumentNode.SelectNodes("//span[@class = 'cause']");
+            var H2 = document.DocumentNode.SelectNodes("/html/body/section[2]/h2");
+            Series series = new Series();
             chart1.Series.Clear();
             chart1.ChartAreas[0].AxisX.IsMarginVisible = false;
-            chart1.ChartAreas[0].AxisY.Maximum = 70;
+            chart1.ChartAreas[0].AxisY.Maximum = 100;
             chart1.ChartAreas[0].AxisY.Interval = 10;
             foreach (var ser in chart1.Series)
             {
@@ -128,18 +193,25 @@ namespace WindowsFormsApp6
                 label3.Visible = true;
                 label1.Visible = true;
                 label4.Visible = true;
-                foreach (var Node in H2)
+                if (H2 != null)
                 {
-                    label4.Text = H2;
+
+                    foreach (var Node in H2)
+                    {
+                        label4.Text = Node.InnerText;
+                    }
+                }
+                else
+                {
+                    label4.Text = textBox1.Text;
                 }
                 foreach (var Node in Nodes)
                 {
-                asa = Node.InnerText;
-                label1.Text += asa + "\n";
-
+                    asa = Node.InnerText;
+                    label1.Text += asa + "\n";
                 }
                 label1.Text += "\n";
-                for(int i = 0; i < 5; i++)
+                for (int i = 0; i < carNodes.Count; i++)
                 {
                     var Node = carNodes[i];
                     var Node1 = Nodes[i];
@@ -169,7 +241,7 @@ namespace WindowsFormsApp6
                 label4.Visible = false;
                 label1.Visible = false;
                 label3.Visible = false;
-                label2.Text = "Ничего не найдено";
+                label2.Text = "Ничего";
             }
         }
         private void Form1_Load(object sender, EventArgs e)
